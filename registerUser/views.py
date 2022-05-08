@@ -1,15 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated  # <-- Here
-
-
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
-
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
+from rest_framework.permissions import IsAuthenticated
+import time
 
 
 @api_view(['POST'])
@@ -20,3 +13,10 @@ def register(request):
             return Response({'name': name})
         else:
             return Response({'hell': name})
+
+
+@api_view(['POST', 'GET'])
+def trial(request):
+    time.sleep(6)
+    print(request.data)
+    return Response({})
